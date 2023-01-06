@@ -1,12 +1,17 @@
 version: '3.9'
 services:
+  # react-appコンテナ(サービス)
   react-app:
     build:
       context: .
       dockerfile: Dockerfile
+    # ローカルのcurrent directoryと同期
     volumes:
       - ./:/usr/src/app
+    # ディレクトリ移動と、アプリ起動をcompose up時に起動
+    # react-sampleの部分は適宜作成するプロジェクト名に変更する。
     command: sh -c "cd react-sample && yarn start"
+    # コンテナポートへローカルホストからアクセスできるように
     ports:
       - "3000:3000"
     stdin_open: true 
